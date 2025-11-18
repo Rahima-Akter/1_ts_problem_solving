@@ -61,62 +61,98 @@ type Value = [number, number];
   type NewPerson = keyof Person;
   //("name" | "phnNum" | "isAlive")
   ```
+
 ### ♦️Explain the difference between any, unknown, and never types in TypeScript.
-- ***any:***
-এটি যে কোনো ধরণের Value ধারণ করে, typescript এর type চেক করে না। এর safety কম। 
-এটি হলো ফোন বুথ এর মতো যে কেউ চাইলেই কল করতে পারে। যেমন :
+
+- **_any:_**
+  এটি যে কোনো ধরণের Value ধারণ করে, typescript এর type চেক করে না। এর safety কম।
+  এটি হলো ফোন বুথ এর মতো যে কেউ চাইলেই কল করতে পারে। যেমন :
+
 ```ts
 let canCall: any;
 
-canCall = 'calling';
+canCall = "calling";
 canCall = 2.55;
 canCall = true;
-canCall = {A: 'obj'};
-console.log(canCall.toFixed(1)) // ভ্যালু যদি number না হয় তাহলে এটি runtime error দিবে, যদিও typescript এটি allow করে
+canCall = { A: "obj" };
+console.log(canCall.toFixed(1)); // ভ্যালু যদি number না হয় তাহলে এটি runtime error দিবে, যদিও typescript এটি allow করে
 ```
-- ***unknown:***
-এটিও any এর মতো যে কোনো ধরণের Value ধারণ করে, তবে run করার আগে typescript এর type চেক করে। এর safety any অপেক্ষা বেশি। 
-এটি হলো mystery-box এর মতো এর ভেতর কি আছে না জেনে ব্যবহার করা যায় না। যেমন :
+
+- **_unknown:_**
+  এটিও any এর মতো যে কোনো ধরণের Value ধারণ করে, তবে run করার আগে typescript এর type চেক করে। এর safety any অপেক্ষা বেশি।
+  এটি হলো mystery-box এর মতো এর ভেতর কি আছে না জেনে ব্যবহার করা যায় না। যেমন :
+
 ```ts
 let num: unknown;
 num = 3;
-if(typeof num === 'number'){
-    console.log(num * num)
+if (typeof num === "number") {
+  console.log(num * num);
 }
 ```
-- ***never:***
-এটি এমন কিছু represent করে যা কখনোই হয় ঘটে না। 
-এটি সাধারণত function এ error throw করার জন্য অথবা কোনো কিছুই return না করার জন্য use  করা হয়। যেমন :
+
+- **_never:_**
+  এটি এমন কিছু represent করে যা কখনোই হয় ঘটে না।
+  এটি সাধারণত function এ error throw করার জন্য অথবা কোনো কিছুই return না করার জন্য use করা হয়। যেমন :
+
 ```ts
-function throwError(msg: string): never{
-    throw new Error(msg);
+function throwError(msg: string): never {
+  throw new Error(msg);
 }
 ```
+
 ### ♦️Provide an example of using union and intersection types in TypeScript.
 
-- ***Union***
+- **_Union_**
+
 ```ts
 type Union = string | number | boolean;
-let user : Union = 3 ;
-console.log('this is user: ', user)
+let user: Union = 3;
+console.log("this is user: ", user);
 // Result: this is user:  3
 ```
-- ***Intersection***
+
+- **_Intersection_**
+
 ```ts
 type Person = {
-   name: string;
-}
+  name: string;
+};
 
 type Employed = {
-   employeeId: number;
-}
+  employeeId: number;
+};
 
 type EmployedPerson = Person & Employed;
 
 const employeedUser: EmployedPerson = {
-   name: 'sam',
-   employeeId: 1234
-}
-console.log('this is employeedUser: ', employeedUser)
+  name: "sam",
+  employeeId: 1234,
+};
+console.log("this is employeedUser: ", employeedUser);
 // Result: this is employeedUser:  { name: 'sam', employeeId: 1234 }
 ```
+
+### ♦️What is the use of enums in TypeScript? Provide an example of a numeric and string enum.
+
+- TypeScript এ enum হলো একটি ফিক্সড রুলস তৈরী করার পদ্ধতি। অর্থাৎ enum এর মাধ্যমে set of constants তৈরী করা হয় ,যার মাধ্যমে কোড এর readability বাড়ে এবং code সহজে maintain করা যায়। যেমন :
+
+```ts
+enum TrafficLight {
+  Stop = "RED",
+  StandBy = "YELLOW",
+  Go = "GREEN",
+}
+let car: TrafficLight = TrafficLight.Go;
+console.log(car);
+// Result: GREEN
+
+enum Numbers {
+  BigNumber = 300,
+  SmallNumber = 3,
+}
+let num: Numbers = Numbers.SmallNumber;
+console.log(num);
+// Result: 3
+```
+
+- enum ব্যবহার এর মাধ্যমে code self-explanatory দেখায়। এবং type-safety ও দেয়।
