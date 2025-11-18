@@ -85,10 +85,38 @@ if(typeof num === 'number'){
 }
 ```
 - ***never:***
-এটি type এমন কিছু represent করে যা কখনোই হয় ঘটে না। 
+এটি এমন কিছু represent করে যা কখনোই হয় ঘটে না। 
 এটি সাধারণত function এ error throw করার জন্য অথবা কোনো কিছুই return না করার জন্য use  করা হয়। যেমন :
 ```ts
 function throwError(msg: string): never{
     throw new Error(msg);
 }
+```
+### ♦️Provide an example of using union and intersection types in TypeScript.
+
+- ***Union***
+```ts
+type Union = string | number | boolean;
+let user : Union = 3 ;
+console.log('this is user: ', user)
+// Result: this is user:  3
+```
+- ***Intersection***
+```ts
+type Person = {
+   name: string;
+}
+
+type Employed = {
+   employeeId: number;
+}
+
+type EmployedPerson = Person & Employed;
+
+const employeedUser: EmployedPerson = {
+   name: 'sam',
+   employeeId: 1234
+}
+console.log('this is employeedUser: ', employeedUser)
+// Result: this is employeedUser:  { name: 'sam', employeeId: 1234 }
 ```

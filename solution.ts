@@ -111,3 +111,4 @@ const calculateTotalPrice = (value: ProductType): number => {
     return total + totalPrice;
   }, 0);
 };
+
