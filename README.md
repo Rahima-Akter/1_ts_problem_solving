@@ -12,7 +12,7 @@ interface A { x: number; } ✅
 interface A { y: number; } ✅
 ```
 
-- টাইপএর ভ্যালু বার বার এসাইন/পরিবর্তন করা যায় না। যেমন :
+- টাইপ এর ভ্যালু বার বার এসাইন/পরিবর্তন করা যায় না। যেমন :
 
 ```ts
 type A = { x: number; } ✅
@@ -61,3 +61,34 @@ type Value = [number, number];
   type NewPerson = keyof Person;
   //("name" | "phnNum" | "isAlive")
   ```
+### ♦️Explain the difference between any, unknown, and never types in TypeScript.
+- ***any:***
+এটি যে কোনো ধরণের Value ধারণ করে, typescript এর type চেক করে না। এর safety কম। 
+এটি হলো ফোন বুথ এর মতো যে কেউ চাইলেই কল করতে পারে। যেমন :
+```ts
+let canCall: any;
+
+canCall = 'calling';
+canCall = 2.55;
+canCall = true;
+canCall = {A: 'obj'};
+console.log(canCall.toFixed(1)) // ভ্যালু যদি number না হয় তাহলে এটি runtime error দিবে, যদিও typescript এটি allow করে
+```
+- ***unknown:***
+এটিও any এর মতো যে কোনো ধরণের Value ধারণ করে, তবে run করার আগে typescript এর type চেক করে। এর safety any অপেক্ষা বেশি। 
+এটি হলো mystery-box এর মতো এর ভেতর কি আছে না জেনে ব্যবহার করা যায় না। যেমন :
+```ts
+let num: unknown;
+num = 3;
+if(typeof num === 'number'){
+    console.log(num * num)
+}
+```
+- ***never:***
+এটি type এমন কিছু represent করে যা কখনোই হয় ঘটে না। 
+এটি সাধারণত function এ error throw করার জন্য অথবা কোনো কিছুই return না করার জন্য use  করা হয়। যেমন :
+```ts
+function throwError(msg: string): never{
+    throw new Error(msg);
+}
+```

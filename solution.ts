@@ -49,14 +49,6 @@ const filterByRating = (value: BooksType): BooksType => {
   return value.filter((ratings) => ratings.rating >= 4 && ratings.rating <= 5);
 };
 
-const books = [
-  { title: 'Book A', rating: 4.5 },
-  { title: 'Book B', rating: -3.2 },
-  { title: 'Book C', rating: 6.0 },
-];
-
-console.log(filterByRating(books));
-
 // -----------------------------------------------------------------------------
 
 type UserType = {
