@@ -46,8 +46,16 @@ const person2 = new Person("Alice", 25);
 type BooksType = { title: string; rating: number }[];
 
 const filterByRating = (value: BooksType): BooksType => {
-  return value.filter((ratings) => ratings.rating >= 4);
+  return value.filter((ratings) => ratings.rating >= 4 && ratings.rating <= 5);
 };
+
+const books = [
+  { title: 'Book A', rating: 4.5 },
+  { title: 'Book B', rating: -3.2 },
+  { title: 'Book C', rating: 6.0 },
+];
+
+console.log(filterByRating(books));
 
 // -----------------------------------------------------------------------------
 
@@ -77,10 +85,7 @@ const printBookDetails = (data: Book): string => {
   }, Available: ${data.isAvailable === true ? "Yes" : "No"}`;
 };
 
-
-
 // ------------------------------------------------------------------------------------
-
 
 type ArrayType = unknown[];
 const getUniqueValues = (arr1: ArrayType, arr2: ArrayType) => {
@@ -98,10 +103,7 @@ const getUniqueValues = (arr1: ArrayType, arr2: ArrayType) => {
   return result;
 };
 
-
-
 // ------------------------------------------------------------------------------------
-
 
 type ProductType = {
   name: string;
